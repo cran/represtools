@@ -1,0 +1,33 @@
+---
+title: {{{ TITLE }}}
+params: 
+  inputDir: "gathered/"
+  thisDir:  "cook/"
+  outputDir: "cooked/"
+  fileStem: {{{ FILE_STEM }}}
+  inputFiles: 
+    {{{ INPUT_FILES }}}
+---
+
+```{r KnitrOpts, echo=FALSE}
+knitr::opts_knit$set(root.dir = normalizePath('../'))
+knitr::opts_chunk$set(echo=TRUE, message=TRUE, warning=TRUE, error=TRUE)
+```
+
+```{r Load, results='hide'}
+loadedObjects <- represtools::LoadObjects(params)
+```
+
+```{r}
+# Cook some data!
+```
+
+```{r ListObjects}
+lstObjects <- represtools::ListObjects(pattern = c("df", "plt"))
+represtools::DescribeObjects(represtools::NamesToObjects(lstObjects))
+```
+
+```{r Save}
+save(file = represtools::OutputFile(params)
+     , list = lstObjects)
+```
