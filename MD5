@@ -1,4 +1,4 @@
-5c4e3838b0b236aa318205163bebb923 *DESCRIPTION
+4bac8e963e96865792e275524bcb29c0 *DESCRIPTION
 a1d84eedb6fbbc8a2617a9a9b4cc4cea *NAMESPACE
 18f1f21b59269e8c9beefd76edf53adb *R/Make.R
 f48929d0304c9783a0745068ed55a729 *R/Objects.R
@@ -7,7 +7,11 @@ f48929d0304c9783a0745068ed55a729 *R/Objects.R
 17f408c7c2d4faef574131620c18a304 *R/Tools.R
 c93163ae45eefe7a30ce96acaaa9129b *R/Verbs.R
 cefbe28ac74efd7f0cf8d919a825a925 *R/represtools-package.r
-e7e8393aad7bfabd5d8891b70808636a *README.md
+657cee425f3468b4c22069aaa9004300 *README.md
+7f6f27e0d9f64fcdd0645318d9e6ff64 *build/vignette.rds
+318a14d795cefb2bbed2f5d140e3176d *inst/doc/represtools.R
+55b57b21d1c4d4318b9b3c1c909b8f7e *inst/doc/represtools.Rmd
+ccf9cf65c01bc5dc20c1d12a01920203 *inst/doc/represtools.html
 ac5da8bdbd4b332984f28ef76a4d811d *inst/rmarkdown/templates/analyze/skeleton/skeleton.Rmd
 10b5d1f609d5aca543159c39be00a8af *inst/rmarkdown/templates/analyze/template.yaml
 15757c681b353443c8d4b9474d0cd287 *inst/rmarkdown/templates/cook/skeleton/skeleton.Rmd
@@ -16,7 +20,8 @@ ac5da8bdbd4b332984f28ef76a4d811d *inst/rmarkdown/templates/analyze/skeleton/skel
 05571b54a557d05e4e1566f9983c05cd *inst/rmarkdown/templates/gather/template.yaml
 4e8972d48eda37c9325393196babe68b *inst/rmarkdown/templates/present/skeleton/skeleton.Rmd
 9c151ed140b74b6d93df22ac279da8c3 *inst/rmarkdown/templates/present/template.yaml
-ad86334f5a5f3dd8520c31239e83ced7 *inst/templates/Makefile.win
+f23e2b55b35fadc229a93ff2bb301039 *inst/templates/Makefile.win
+dc81e2f6c20bea3f042614b6b35aa1a1 *inst/templates/rstudio.Rproj
 6033a12318ec4bce92b9db8ad705e2a9 *man/Analyze.Rd
 946377d8eec0dc1d67b3caa053544099 *man/Cook.Rd
 1448563ed97f59cd29a57851fefff8fc *man/DescribeObjects.Rd
@@ -31,6 +36,6 @@ da7076084ebee198f96b2eef99d3ed88 *man/LoadObjects.Rd
 5f3d03e40c0cf500e25b576cbfe9eee7 *man/Present.Rd
 4195004077a3d00378fe0fa362496703 *man/represtools.Rd
 729de04e44029ff112c584e6b7db4ed6 *tests/testthat.R
-211446e5fce6e7c21ec5ed71178e0273 *tests/testthat/testNewAnalysis.R
+ede0f4cbe286e3b86b60bd49bd0a168e *tests/testthat/testNewAnalysis.R
 ec4eb44703583197095e26c67d860059 *tests/testthat/testObjects.R
 55b57b21d1c4d4318b9b3c1c909b8f7e *vignettes/represtools.Rmd

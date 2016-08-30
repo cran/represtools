@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Brian A. Fannin" />
+
+<meta name="date" content="2016-08-29" />
+
+<title>represtools</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">represtools</h1>
+<h4 class="author"><em>Brian A. Fannin</em></h4>
+<h4 class="date"><em>2016-08-29</em></h4>
+
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>The package <code>represtools</code> supports a specific, yet flexible analytic workflow. The guiding principles are:</p>
+<ul>
+<li>Any and all of the steps in the research may be reproduced by another researcher.</li>
+<li>Each analytic step is modular. This means that it may work in isolation, so long as precedent data exists.</li>
+<li>There are four major analytic steps: gather, cook, analyze and publish.</li>
+<li>Every step uses <code>rmarkdown</code> for code and documentation.</li>
+<li>Data is exchanged using .rda files.</li>
+<li>The <code>make</code> program is used to ensure that data and content is (re)built when needed by any module.</li>
+</ul>
+<div id="the-four-steps-of-data-analysis" class="section level3">
+<h3>The four steps of data analysis</h3>
+<p>The four steps are verbs. Their outputs are adjectives which describe the data contained. Each verb and adjective gets its own directory. Let’s say we’d like to analyze baseball data. The command below will create this structure.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">represtools::<span class="kw">NewResearch</span>(<span class="st">&quot;Baseball&quot;</span>)</code></pre></div>
+<p>The resulting directory tree is as shown below:</p>
+<pre><code>- Baseball/
+| - analyze/
+| - analyzed/
+| - cook/
+| - cooked/
+| - gather/
+| - gathered/
+| - present/
+| - presented/
+| - Baseball.Rproj
+| - Makefile</code></pre>
+<p>By default, <code>NewResearch</code> will add an RStudio project file to the directory. That project file will presume that <code>make</code> is used to build the project. <code>NewResearch</code> adds this makefile to the project directory. Note that the makefile uses some extensions that are present in the GNU version of <code>make</code> as described in the <code>DESCRIPTION</code> file.</p>
+</div>
+</div>
+<div id="gather-some-data" class="section level2">
+<h2>Gather some data</h2>
+<p>Every analysis begins with data. To start gathering data, simply execute the <code>Gather</code> function with a file name which describes the data being gathered.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">represtools::<span class="kw">Gather</span>(<span class="st">&quot;Hitter&quot;</span>)</code></pre></div>
+<p>This will create a new .Rmd file in the “gather” directory. The template will set various <code>knitr</code> options as below:</p>
+<pre><code>knitr::opts_knit$set(root.dir = normalizePath('../'))
+knitr::opts_chunk$set(echo=TRUE, message=TRUE, warning=TRUE, error=TRUE)</code></pre>
+<p>The <code>normalizePath</code> option ensures that we may run in a child directory of the analysis and use paths relative to that directory. For the gather step, the default is to echo every line of code and generate every message, warning and error.</p>
+<p>After data has been gathered, the template will collect the names of every object in memory to save to an .rda file. By default, it will search for objects which start with the characters “df”, “plt” and “fit”. This is a kind of Hungarian notation to identify the most common analysis objects: “df” - a data frame (or tbl_df), “plt” - a plot object and “fit” - a model fit.</p>
+<p>The <code>DescribeObjects</code> function will apply a vector of functions to a vector of objects. The default is to apply the <code>str</code> function. Note that we wrap the object names with a call to <code>NamesToObjects</code>. This will seach for objects in memory based on variable name and return them in a list.</p>
+<pre><code>lstObjects &lt;- represtools::ListObjects()
+represtools::DescribeObjects(represtools::NamesToObjects(lstObjects))</code></pre>
+<p>Finally, we save the output to .rda. The function <code>OutputFile</code> uses elements from the params object to construct the output filename. More about the use of parameters in <code>rmarkdown</code> may be found here: <a href="http://rmarkdown.rstudio.com/developer_parameterized_reports.html"></a>.</p>
+<pre><code>save(file = represtools::OutputFile(params)
+     , list = lstObjects)</code></pre>
+<p>Though not strictly enforced, I find it a best practice to have one Gather file for each data object (typically a data frame).</p>
+</div>
+<div id="cook-the-data" class="section level2">
+<h2>Cook the data</h2>
+<p>Gathered data is raw. The opposite of raw data is cooked data. “Cooking”, in this context, refers to all of the manipulation one performs to render data fit for analysis. This is everything from renaming columns to filtering and merging multiple data sets. This could also encompass treatment of data fields like scaling, centering and so on.</p>
+<p>The <code>inputFiles</code> argument will add those values to the params section of the YAML. By default, the cook .Rmd template will load those files into memory as the first step of the cooking process.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">represtools::<span class="kw">Cook</span>(<span class="st">&quot;Hitters&quot;</span>, <span class="dt">inputFiles =</span> <span class="kw">c</span>(<span class="st">&quot;Hitters&quot;</span>, <span class="st">&quot;Salaries&quot;</span>))</code></pre></div>
+<p>Note that there is a new code chunk just after initializing knitr. the <code>LoadObjects</code> function will load everything from all of the .rda files listed in <code>inputFiles</code>. It will return a character string of all the objects loaded. Note that there is a possibility for naming collisions. Be careful not to use the same object name in multiple files.</p>
+<pre><code>loadedObjects &lt;- represtools::LoadObjects(params)</code></pre>
+</div>
+<div id="analyze-the-data" class="section level2">
+<h2>Analyze the data</h2>
+<p>If I’ve properly cooked my data, I’m good to go. The <code>Analyze</code> function will produce a new .Rmd file with the input that I need for analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">represtools::<span class="kw">Analyze</span>(<span class="st">&quot;HitterPerformance&quot;</span>, <span class="dt">inputFiles =</span> <span class="st">&quot;Hitters&quot;</span>)</code></pre></div>
+<p>This template will be less aggressive at informing the user in the published document. Only errors will be shown.</p>
+<pre><code>knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=TRUE)</code></pre>
+</div>
+<div id="present" class="section level2">
+<h2>Present</h2>
+<p>Present is slightly different. There will be no data output for further stage. Instead the goal is to generate output for an audience.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">represtools::<span class="kw">Present</span>(<span class="st">&quot;Handedness&quot;</span>
+                     , <span class="dt">inputFiles =</span> <span class="st">&quot;HitterPerformance&quot;</span>
+                     , <span class="dt">title =</span> <span class="st">&quot;On the quality of right-handed batters&quot;</span>
+                     , <span class="dt">output =</span> <span class="st">&quot;word_document&quot;</span>)</code></pre></div>
+<p>There is a dummy parameter at the end of the .Rmd file which is used to generate an .rda file. This prevents the make utility from recreating a presentation document. This is also a useful control for the user to ensure that the file is recreated until they are satisfied with the results.</p>
+</div>
+<div id="make" class="section level2">
+<h2>Make</h2>
+<p><code>represtools</code> relies on the tool <code>make</code> to control the workflow. <code>make</code> keeps track of file dependencies between various modules of the project. A full description of <code>make</code> may be found in the <a href="http://www.gnu.org/software/make/">GNU Make documentation</a>. <code>Make</code> is an option for constructing an RStudio project and this will be reflected in the RStudio project file, if the user asked for one. One may also invoke Make by calling the <code>Make</code> function within represtools. The <code>make</code> program must be installed an available on the system path in order for this to work.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">represtools::<span class="kw">Make</span>()</code></pre></div>
+<p><code>Make</code> accepts one parameter, which indicates which recipe to create. By default, every <code>represtools</code> Makefile comes with at least four: “all”, “clean”, “cooked” and “cleanCooked”.</p>
+</div>
+<div id="a-sample-workflow" class="section level2">
+<h2>A sample workflow</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">represtools::<span class="kw">NewResearch</span>(<span class="st">&quot;Baseball&quot;</span>)
+represtools::<span class="kw">Gather</span>(<span class="st">&quot;Hitters&quot;</span>)
+<span class="co"># write some code</span>
+represtools::<span class="kw">Cook</span>(<span class="st">&quot;Hitters&quot;</span>)
+<span class="co"># write some code</span>
+represtools::<span class="kw">Analyze</span>(<span class="st">&quot;Handedness&quot;</span>)
+<span class="co"># write some code</span>
+represtools::<span class="kw">Present</span>(<span class="st">&quot;Handedness&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;On the quality of right-handed batters&quot;</span>, <span class="dt">output =</span> <span class="st">&quot;html&quot;</span>)
+<span class="co"># write some code</span>
+represtools::<span class="kw">Make</span>()</code></pre></div>
+<p>And that would do it.</p>
+<p>Let’s say that I’d like to augment my analysis with another set of batters. I’ll need a new data frame, so I need a new gather file. It’s fairly straightforward to add a new data file and re-cook. If I’m lucky, my cooked data is such that I don’t need to alter my analysis code to generate new output.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">represtools::<span class="kw">Gather</span>(<span class="st">&quot;Japanese&quot;</span>)
+<span class="co"># write some code to gather</span>
+<span class="co"># edit the code in the &quot;Hitters&quot; cook module</span>
+
+represtools::<span class="kw">Make</span>(<span class="st">&quot;clean&quot;</span>)
+represtools::<span class="kw">Make</span>()</code></pre></div>
+</div>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
+<div id="why-not-.rds" class="section level3">
+<h3>Why not .rds?</h3>
+<p>For now, I’m sticking with .rda. It enables you to save more than one item in a file and doesn’t lose the names of the objects. I think it’s possible to introduce confusion if a user loads the same data into two different named objects. As the goal is reproduction, we should try to avoid this. Yes, it’s possible to copy an object to a new variable, but I think this is more transparent in a review of code. I think most R users may not even be aware of the difference between .rda and .rds.</p>
+</div>
+<div id="whats-wrong-with-projecttemplate" class="section level3">
+<h3>What’s wrong with ProjectTemplate?</h3>
+<p>The short answer is nothing. John Myles White doesn’t need my help in getting more efficient at analyzing data. His structure works for him and, I’m sure, loads of other people. It just didn’t work for me. My tiny brain can’t handle more than about 4 folders at a time. I struggle to understand the difference between “data” and “cache”, “doc” and “reports”, “lib” and “src”. ProjectTemplate’s philosophy seems monolithic: load all of the data, work with it and produce a single output. I like to break things into bite-size chunks and only look at whatever element of data is relevant for a certain piece of the analysis. I also find that gathering and cooking tend to be steps that get reworked often, even in a later stage of analysis.</p>
+<p>None of this is meant as crticism. John White is loads smarter than me and he’s created something very useful for people whose brains function like his. Some people like Coke. Some people like Pepsi.</p>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
